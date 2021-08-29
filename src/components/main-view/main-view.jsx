@@ -2,12 +2,15 @@ import React from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import Login from "../login-view/login";
+import Register from "../register-view/register";
 
 
 class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
+      register: null,
+      loggedIn: null,
       movies: [
         {
           Title: "Inception",
@@ -51,6 +54,18 @@ class MainView extends React.Component {
     .catch(err=>console.log(err))
   }
 
+  setRegistered(register){
+    this.setState({
+      register
+    })
+  }
+
+  setLoggedIn(logedIn){
+    this.setState({
+      logedIn
+    })
+  }
+
   setMovieSelected(newSelectedMovie) {
     this.setState({
       selectedMovie: newSelectedMovie
@@ -58,15 +73,27 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie } = this.state;
+    const { movies, selectedMovie, register, login } = this.state;
 
-    if (movies.length === 0)
-      return <div className="main-view">This list is empty!</div>;
+    if(!register) {
+      return (<Register onClick={(register)=>setRegistered(register)}></Register>)
+    }
+
+    if(!loggedIn) {
+      return (<Login r onClick={(logedIn)=>this.setLoggedIn(logedIn)}></Login>)
+    }
+
     return (
       <div className="main-view">
-        <Login></Login>
+        {selectedMovie
+          ? <MovieView movie={selectedMovie} OnClickBack={newSelectedMovie => { this.setMovieSelected(newSelectedMovie); }}/>
+          : movies.map((movie, index) => (
+            <MovieCard key={index} movie={movie} onMovieClick={(movie) => { this.setMovieSelected(movie) }}/>
+          ))
+        }
       </div>
     );
+
   }
 }
 
