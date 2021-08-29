@@ -1,6 +1,8 @@
 import React from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import Login from "../login-view/login";
+
 
 class MainView extends React.Component {
   constructor() {
@@ -37,6 +39,18 @@ class MainView extends React.Component {
     };
   }
 
+  componentDidMount(){
+    fetch("https://aqueous-temple-90442.herokuapp.com/movies")
+    .then(response=>response.json())
+    .then(response=>{
+      console.log(response);
+      this.setState({
+        movies: response
+      });
+    })
+    .catch(err=>console.log(err))
+  }
+
   setMovieSelected(newSelectedMovie) {
     this.setState({
       selectedMovie: newSelectedMovie
@@ -50,12 +64,7 @@ class MainView extends React.Component {
       return <div className="main-view">This list is empty!</div>;
     return (
       <div className="main-view">
-        {selectedMovie
-          ? <MovieView movie={selectedMovie} OnClickBack={newSelectedMovie => { this.setMovieSelected(newSelectedMovie); }}/>
-          : movies.map((movie, index) => (
-            <MovieCard key={index} movie={movie} onMovieClick={(movie) => { this.setMovieSelected(movie) }}/>
-          ))
-        }
+        <Login></Login>
       </div>
     );
   }
