@@ -5,6 +5,9 @@ import Login from "../login-view/login";
 import Register from "../register-view/register";
 
 class MainView extends React.Component {
+  state = {
+    movies: []
+  }
   constructor() {
     super();
   }
@@ -13,7 +16,6 @@ class MainView extends React.Component {
     fetch("https://movie-api-v001.herokuapp.com/movies")
     .then(response=>response.json())
     .then(response=>{
-      console.log(response);
       this.setState({
         movies: response
       });
