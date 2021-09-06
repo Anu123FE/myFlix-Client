@@ -1,25 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-class Register extends Component {
-    state = {  }
-    render() { 
+export function Register(props) {
+    const [ username, setUsername ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ birthday, setBirthday ] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(username, password, email, birthday);
+        props.onRegistration(username);
+      };
+
         return (
-        <div>
-           <form>
-                <label for="username">Username:</label><br />
-                <input type="text" id="username" name="username"></input><br />
-                <label for="email">Email:</label><br />
-                <input type="email" id="email" name="email"></input><br />
-                <label for="password">Password:</label><br />
-                <input type="password" id="password" name="password"></input><br />
-                <label for="birthdate">Birthdate:</label><br />
-                <input type="birthdate" id="birthdate" name="birthdate"></input><br />
-                <input type="submit" value="Submit" />
+       <Form>
+      <Form.Group className="mb-3" controlId="formGroupUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupBirthday">
+        <Form.Label>Birthday</Form.Label>
+        <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+      </Form.Group>
+      <Button variant="danger" type="submit" onClick={handleSubmit}>Register</Button>
+    </Form> );
 
-      </form>
-      
-        </div> );
-    }
 }
  
 export default Register;
