@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-nightly.1981",
-    "@parcel/transformer-sass": "^2.0.0-beta.2",
     "gh-pages": "^3.2.3"
   }
 }
