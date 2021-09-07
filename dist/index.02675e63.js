@@ -27381,7 +27381,7 @@ try {
             columnNumber: 9
           }
         }, /*#__PURE__*/_reactDefault.default.createElement("img", {
-          src: movie.ImagePath,
+          src: "../../images/" + movie.ImagePath,
           __self: this,
           __source: {
             fileName: _jsxFileName,
